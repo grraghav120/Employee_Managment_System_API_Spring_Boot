@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: SpringFirstApplication
+
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;database=employeManagementSystem;encrypt=false
+    username: employee
+    password: root
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
