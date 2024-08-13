@@ -1,8 +1,8 @@
 package com.myproject.SpringFirstApplication.Controller;
 
 import com.myproject.SpringFirstApplication.DTO.EmployeeDTO;
-import com.myproject.SpringFirstApplication.Entity.Employee;
-import com.myproject.SpringFirstApplication.Service.IEmployeeService;
+import com.myproject.SpringFirstApplication.DTO.EmployeeResponse;
+import com.myproject.SpringFirstApplication.Service.Interfaces.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +16,12 @@ public class EmployeeController {
     IEmployeeService employeeService;
 
     @GetMapping("")
-    public List<EmployeeDTO> GetAll(){
+    public List<EmployeeResponse> GetAll(){
         return employeeService.GetAll();
     }
 
     @GetMapping("{id}")
-    public EmployeeDTO Get(@PathVariable int id){
+    public EmployeeResponse Get(@PathVariable int id){
         return employeeService.Get(id);
     }
 

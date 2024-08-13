@@ -10,12 +10,9 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeDTO {
+public class ProjectDTO {
     private String Name;
-    private int phoneno;
-    private String Email;
-    private Date DOB;
-    private Date DOJ;
-    private int Salary;
-    private int addressid;
+    private String status;
+    private Date startTime;
+    private Date EndTime;
 }

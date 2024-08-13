@@ -1,35 +1,48 @@
 package com.myproject.SpringFirstApplication.Service;
 
 import com.myproject.SpringFirstApplication.DTO.EmployeeDTO;
+import com.myproject.SpringFirstApplication.DTO.EmployeeResponse;
 import com.myproject.SpringFirstApplication.Entity.Employee;
 import com.myproject.SpringFirstApplication.Repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.myproject.SpringFirstApplication.Service.Interfaces.IEmployeeService;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
-public class EmployeeService implements IEmployeeService{
+public class EmployeeService implements IEmployeeService {
 
-    @Autowired
-    EmployeeRepository employeeRepository;
+    final EmployeeRepository employeeRepository;
+    final ModelMapper mapper;
+    final AddressService addressService;
+
+    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper mapper, AddressService addressService) {
+        this.employeeRepository = employeeRepository;
+        this.mapper = mapper;
+        this.addressService = addressService;
+    }
 
     @Override
-    public EmployeeDTO Get(int id) {
+    public EmployeeResponse Get(int id) {
         Employee employee=employeeRepository.findById(id).orElse(null);
-        return new EmployeeDTO(employee.getId(),employee.getName(),employee.getSalary());
+        EmployeeResponse singleEmployee = mapper.map(employee,EmployeeResponse.class);
+        singleEmployee.setAddress(addressService.Get(employee.getAddressid()));
+        return singleEmployee;
     }
 
     @Override
     public void Create(EmployeeDTO employee) {
-        Employee insertedEmployee=new Employee(employee.getId(),employee.getName(),employee.getSalary());
+        Employee insertedEmployee = mapper.map(employee,Employee.class);
         employeeRepository.save(insertedEmployee);
     }
 
     @Override
-    public List<EmployeeDTO> GetAll() {
-        List<Employee> employee = employeeRepository.findAll();
-        List<EmployeeDTO> employees = new java.util.ArrayList<>(List.of());
-        for(Employee emp:employee){
-            employees.add(new EmployeeDTO(emp.getId(),emp.getName(),emp.getSalary()));
+    public List<EmployeeResponse> GetAll() {
+        List<Employee> employeeList = employeeRepository.findAll();
+        List<EmployeeResponse> employees = new java.util.ArrayList<>(List.of());
+        for(Employee emp:employeeList){
+            EmployeeResponse employee = mapper.map(emp,EmployeeResponse.class);
+            employee.setAddress(addressService.Get(emp.getAddressid()));
+            employees.add(employee);
         }
         return employees;
     }
@@ -46,7 +59,7 @@ public class EmployeeService implements IEmployeeService{
             savedEmployee.setName(employee.getName());
             savedEmployee.setSalary(employee.getSalary());
             Employee emp=employeeRepository.save(savedEmployee);
-            return new EmployeeDTO(emp.getId(),emp.getName(),emp.getSalary());
+            return new EmployeeDTO(emp.getName(),emp.getPhoneno(),emp.getEmail(),emp.getDOB(),emp.getDOJ(),emp.getSalary(),emp.getAddressid());
         }else return null;
     }
 }
