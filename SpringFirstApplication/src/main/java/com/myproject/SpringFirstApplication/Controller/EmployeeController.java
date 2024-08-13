@@ -1,7 +1,6 @@
 package com.myproject.SpringFirstApplication.Controller;
 
 import com.myproject.SpringFirstApplication.Entity.Employee;
-import com.myproject.SpringFirstApplication.Service.EmployeeService;
 import com.myproject.SpringFirstApplication.Service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
