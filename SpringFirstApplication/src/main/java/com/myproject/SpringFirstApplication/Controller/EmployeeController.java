@@ -1,5 +1,6 @@
 package com.myproject.SpringFirstApplication.Controller;
 
+import com.myproject.SpringFirstApplication.DTO.EmployeeDTO;
 import com.myproject.SpringFirstApplication.Entity.Employee;
 import com.myproject.SpringFirstApplication.Service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +16,22 @@ public class EmployeeController {
     IEmployeeService employeeService;
 
     @GetMapping("")
-    public List<Employee> GetAll(){
+    public List<EmployeeDTO> GetAll(){
         return employeeService.GetAll();
     }
 
     @GetMapping("{id}")
-    public Employee Get(@PathVariable int id){
+    public EmployeeDTO Get(@PathVariable int id){
         return employeeService.Get(id);
     }
 
     @PostMapping()
-    public void Create(@RequestBody Employee employee){
+    public void Create(@RequestBody EmployeeDTO employee){
         employeeService.Create(employee);
     }
 
     @PutMapping("{id}")
-    public Employee Update(@RequestBody Employee employee,@PathVariable int id){
+    public EmployeeDTO Update(@RequestBody EmployeeDTO employee,@PathVariable int id){
         return employeeService.Update(employee,id);
     }
 

@@ -1,5 +1,6 @@
 package com.myproject.SpringFirstApplication.Service;
 
+import com.myproject.SpringFirstApplication.DTO.EmployeeDTO;
 import com.myproject.SpringFirstApplication.Entity.Employee;
 import com.myproject.SpringFirstApplication.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +13,25 @@ public class EmployeeService implements IEmployeeService{
     EmployeeRepository employeeRepository;
 
     @Override
-    public Employee Get(int id) {
-        return employeeRepository.findById(id).orElse(null);
+    public EmployeeDTO Get(int id) {
+        Employee employee=employeeRepository.findById(id).orElse(null);
+        return new EmployeeDTO(employee.getId(),employee.getName(),employee.getSalary());
     }
 
     @Override
-    public void Create(Employee employee) {
-        employeeRepository.save(employee);
+    public void Create(EmployeeDTO employee) {
+        Employee insertedEmployee=new Employee(employee.getId(),employee.getName(),employee.getSalary());
+        employeeRepository.save(insertedEmployee);
     }
 
     @Override
-    public List<Employee> GetAll() {
-        return employeeRepository.findAll();
+    public List<EmployeeDTO> GetAll() {
+        List<Employee> employee = employeeRepository.findAll();
+        List<EmployeeDTO> employees = new java.util.ArrayList<>(List.of());
+        for(Employee emp:employee){
+            employees.add(new EmployeeDTO(emp.getId(),emp.getName(),emp.getSalary()));
+        }
+        return employees;
     }
 
     @Override
@@ -32,12 +40,13 @@ public class EmployeeService implements IEmployeeService{
     }
 
     @Override
-    public Employee Update(Employee employee,int id) {
+    public EmployeeDTO Update(EmployeeDTO employee,int id) {
         Employee savedEmployee=employeeRepository.findById(id).orElse(null);
         if(savedEmployee!=null){
             savedEmployee.setName(employee.getName());
             savedEmployee.setSalary(employee.getSalary());
-            return employeeRepository.save(savedEmployee);
+            Employee emp=employeeRepository.save(savedEmployee);
+            return new EmployeeDTO(emp.getId(),emp.getName(),emp.getSalary());
         }else return null;
     }
 }

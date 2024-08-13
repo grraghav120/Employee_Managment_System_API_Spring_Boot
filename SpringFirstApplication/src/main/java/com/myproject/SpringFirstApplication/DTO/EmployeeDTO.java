@@ -1,18 +1,14 @@
-package com.myproject.SpringFirstApplication.Entity;
+package com.myproject.SpringFirstApplication.DTO;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Employees")
-public class Employee{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EmployeeDTO {
     private int id;
     private String Name;
     private int Salary;
