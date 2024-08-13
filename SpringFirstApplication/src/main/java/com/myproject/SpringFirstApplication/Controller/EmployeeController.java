@@ -31,7 +31,7 @@ public class EmployeeController {
     }
 
     @PutMapping("{id}")
-    public EmployeeDTO Update(@RequestBody EmployeeDTO employee,@PathVariable int id){
+    public EmployeeResponse Update(@RequestBody EmployeeDTO employee,@PathVariable int id){
         return employeeService.Update(employee,id);
     }
 

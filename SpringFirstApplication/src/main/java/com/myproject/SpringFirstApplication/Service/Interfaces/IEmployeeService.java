@@ -9,6 +9,6 @@ public interface IEmployeeService {
     public EmployeeResponse Get(int id);
     public void Create(EmployeeDTO employee);
     public List<EmployeeResponse> GetAll();
-    public EmployeeDTO Update(EmployeeDTO employee,int id);
+    public EmployeeResponse Update(EmployeeDTO employee,int id);
     public void Delete(int id);
 }

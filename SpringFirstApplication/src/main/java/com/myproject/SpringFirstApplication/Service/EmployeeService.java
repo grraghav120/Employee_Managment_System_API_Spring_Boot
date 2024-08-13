@@ -53,13 +53,19 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public EmployeeDTO Update(EmployeeDTO employee,int id) {
+    public EmployeeResponse Update(EmployeeDTO employee,int id) {
         Employee savedEmployee=employeeRepository.findById(id).orElse(null);
         if(savedEmployee!=null){
             savedEmployee.setName(employee.getName());
+            savedEmployee.setPhoneno(employee.getPhoneno());
+            savedEmployee.setEmail(employee.getEmail());
+            savedEmployee.setDOB(employee.getDOB());
+            savedEmployee.setDOJ(employee.getDOJ());
             savedEmployee.setSalary(employee.getSalary());
+            savedEmployee.setAddressid(employee.getAddressid());
             Employee emp=employeeRepository.save(savedEmployee);
-            return new EmployeeDTO(emp.getName(),emp.getPhoneno(),emp.getEmail(),emp.getDOB(),emp.getDOJ(),emp.getSalary(),emp.getAddressid());
-        }else return null;
+            return Get(emp.getId());
+        }
+        else return null;
     }
 }
