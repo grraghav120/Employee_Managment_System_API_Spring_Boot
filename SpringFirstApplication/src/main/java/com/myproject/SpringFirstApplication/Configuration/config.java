@@ -2,9 +2,11 @@ package com.myproject.SpringFirstApplication.Configuration;
 
 import com.myproject.SpringFirstApplication.Repository.DepartmentRepository;
 import com.myproject.SpringFirstApplication.Repository.EmployeeRepository;
+import com.myproject.SpringFirstApplication.Repository.RoleRepository;
 import com.myproject.SpringFirstApplication.Service.AddressService;
 import com.myproject.SpringFirstApplication.Service.EmployeeService;
 import com.myproject.SpringFirstApplication.Service.DepartmentService;
+import com.myproject.SpringFirstApplication.Service.RoleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,11 @@ public class config {
     @Bean
     public DepartmentService departmentService(DepartmentRepository departmentRepository, ModelMapper mapper){
         return new DepartmentService(departmentRepository,mapper);
+    }
+
+    @Bean
+    public RoleService roleService(RoleRepository roleRepository, ModelMapper mapper){
+        return new RoleService(roleRepository,mapper);
     }
 
     @Bean
