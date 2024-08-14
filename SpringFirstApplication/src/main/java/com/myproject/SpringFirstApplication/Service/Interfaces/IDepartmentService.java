@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface IDepartmentService {
     public DepartmentReponse Get(int id);
-    public void Create(DepartmentDTO employee);
+    public void Create(DepartmentDTO department);
     public List<DepartmentReponse> GetAll();
-    public DepartmentReponse Update(DepartmentDTO employee,int id);
+    public DepartmentReponse Update(DepartmentDTO department,int id);
     public void Delete(int id);
 }
