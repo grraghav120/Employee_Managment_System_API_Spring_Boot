@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface IRoleService {
     public RoleResponse Get(int id);
-    public void Create(RoleDTO employee);
+    public void Create(RoleDTO role);
     public List<RoleResponse> GetAll();
-    public RoleResponse Update(RoleDTO employee,int id);
+    public RoleResponse Update(RoleDTO role,int id);
     public void Delete(int id);
 }
