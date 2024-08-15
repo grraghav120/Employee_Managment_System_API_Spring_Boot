@@ -13,6 +13,6 @@ import java.util.Date;
 public class ProjectDTO {
     private String Name;
     private String status;
-    private Date startTime;
-    private Date EndTime;
+    private Date starttime;
+    private Date endtime;
 }

@@ -3,7 +3,7 @@ package com.myproject.SpringFirstApplication.Controller;
 
 import com.myproject.SpringFirstApplication.DTO.RoleDTO;
 import com.myproject.SpringFirstApplication.DTO.RoleResponse;
-import com.myproject.SpringFirstApplication.Service.RoleService;
+import com.myproject.SpringFirstApplication.Service.Interfaces.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class RoleController {
 
     @Autowired
-    RoleService roleService;
+    IRoleService roleService;
 
     @GetMapping("{id}")
     public RoleResponse Get(@PathVariable int id){
